@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements IVLCVout.Callback
 
     // display surface
     private LinearLayout layout;
-    private FrameLayout vlcOverlay;
+//    private FrameLayout vlcOverlay;
     private SurfaceView mSurface;
     private SurfaceHolder holder;
     private ImageView vlcButtonPlayPause;
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements IVLCVout.Callback
     private static final int SURFACE_4_3 = 5;
     private static final int SURFACE_ORIGINAL = 6;
 
-    private int mCurrentSize = SURFACE_BEST_FIT;
+    private int mCurrentSize = SURFACE_ORIGINAL;
 
     /*************
      * Activity
@@ -89,37 +89,38 @@ public class MainActivity extends AppCompatActivity implements IVLCVout.Callback
         layout = findViewById(R.id.vlc_container);
         mSurface = findViewById(R.id.vlc_surface);
 
-        vlcOverlay = (FrameLayout) findViewById(R.id.vlc_overlay);
+//        vlcOverlay = (FrameLayout) findViewById(R.id.vlc_overlay);
         vlcButtonPlayPause = (ImageView) findViewById(R.id.vlc_button_play_pause);
         vlcButtonScale = (ImageButton) findViewById(R.id.vlc_button_scale);
 
         // Receive path to play from intent
-        mFilePath = "http://tv.latintvweb.com:8000/live/GilbertoQuin/Quinones8ht653vgh9/75480.m3u8";
+//        mFilePath = "http://tv.latintvweb.com:8000/live/GilbertoQuin/Quinones8ht653vgh9/75480.m3u8";
+        mFilePath = "http://tv.latintvweb.com:8000/live/Adr1an3useb10Du4rt3/V7EmeDJkbu/75480.m3u8";
         playMovie();
     }
 
     public void playMovie() {
         if (mMediaPlayer != null && mMediaPlayer.isPlaying())
             return;
-        layout.setVisibility(View.VISIBLE);
+//        layout.setVisibility(View.VISIBLE);
         holder = mSurface.getHolder();
         createPlayer(mFilePath);
     }
 
     private void toggleFullscreen(boolean fullscreen) {
-        WindowManager.LayoutParams attrs = getWindow().getAttributes();
-        if (fullscreen) {
-            attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
-            layout.setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_FULLSCREEN);
-        } else {
-            attrs.flags &= ~WindowManager.LayoutParams.FLAG_FULLSCREEN;
-        }
-        getWindow().setAttributes(attrs);
+//        WindowManager.LayoutParams attrs = getWindow().getAttributes();
+//        if (fullscreen) {
+//            attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
+//            layout.setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+//                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+//                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+//                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+//                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+//                    | View.SYSTEM_UI_FLAG_FULLSCREEN);
+//        } else {
+//            attrs.flags &= ~WindowManager.LayoutParams.FLAG_FULLSCREEN;
+//        }
+//        getWindow().setAttributes(attrs);
     }
 
     private void setupControls() {
@@ -145,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements IVLCVout.Callback
                 } else {
                     mCurrentSize = 0;
                 }
-                changeSurfaceSize(true);
+//                changeSurfaceSize(true);
             }
         });
 
@@ -154,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements IVLCVout.Callback
         runnableOverlay = new Runnable() {
             @Override
             public void run() {
-                vlcOverlay.setVisibility(View.GONE);
+//                vlcOverlay.setVisibility(View.GONE);
                 toggleFullscreen(true);
             }
         };
@@ -163,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements IVLCVout.Callback
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                vlcOverlay.setVisibility(View.VISIBLE);
+//                vlcOverlay.setVisibility(View.VISIBLE);
 
                 handlerOverlay.removeCallbacks(runnableOverlay);
                 handlerOverlay.postDelayed(runnableOverlay, timeToDisappear);
@@ -304,7 +305,7 @@ public class MainActivity extends AppCompatActivity implements IVLCVout.Callback
     }
 
     private void changeSurfaceLayout() {
-        changeSurfaceSize(false);
+//        changeSurfaceSize(false);
     }
 
     /*************
